@@ -36,17 +36,17 @@ Parameters:
     Default: mytodoappdemo
 
   # For Amplify Console frontend hosting
-  Repository:
-    Type: String
-    Description: GitHub Repository URL
-  Branch:
-    Type: String
-    Description: GitHub Branch
-    Default: master
-  OauthToken:
-    Type: String
-    Description: GitHub Repository URL
-    NoEcho: true
+  # Repository:
+  #   Type: String
+  #   Description: GitHub Repository URL
+  # Branch:
+  #   Type: String
+  #   Description: GitHub Branch
+  #   Default: master
+  # OauthToken:
+  #   Type: String
+  #   Description: GitHub Repository URL
+  #   NoEcho: true
 
 Resources:
 
@@ -304,64 +304,64 @@ Resources:
 
   # Amplify console hosting for static website
   # 
-  AmplifyRole:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service:
-                - amplify.amazonaws.com
-            Action:
-              - sts:AssumeRole
-      Policies:
-        - PolicyName: Amplify
-          PolicyDocument:
-            Version: 2012-10-17
-            Statement:
-              - Effect: Allow
-                Action: "amplify:*"
-                Resource: "*"
+  # AmplifyRole:
+  #   Type: AWS::IAM::Role
+  #   Properties:
+  #     AssumeRolePolicyDocument:
+  #       Version: 2012-10-17
+  #       Statement:
+  #         - Effect: Allow
+  #           Principal:
+  #             Service:
+  #               - amplify.amazonaws.com
+  #           Action:
+  #             - sts:AssumeRole
+  #     Policies:
+  #       - PolicyName: Amplify
+  #         PolicyDocument:
+  #           Version: 2012-10-17
+  #           Statement:
+  #             - Effect: Allow
+  #               Action: "amplify:*"
+  #               Resource: "*"
 
-  AmplifyApp:
-    Type: "AWS::Amplify::App"
-    Properties:
-      Name: TodoApp
-      Repository: !Ref Repository
-      Description: Todo example app
-      OauthToken: !Ref OauthToken
-      BuildSpec: |-
-        version: 0.1
-        frontend:
-          phases:
-            build:
-              commands:
-                - cd www/src
-                - npm install
-                - npm run build
-          artifacts:
-            baseDirectory: www/build/
-            files:
-              - '**/*'
-      Tags:
-        - Key: Name
-          Value: Todo
-      IAMServiceRole: !GetAtt AmplifyRole.Arn
+  # AmplifyApp:
+  #   Type: "AWS::Amplify::App"
+  #   Properties:
+  #     Name: TodoApp
+  #     Repository: !Ref Repository
+  #     Description: Todo example app
+  #     OauthToken: !Ref OauthToken
+  #     BuildSpec: |-
+  #       version: 0.1
+  #       frontend:
+  #         phases:
+  #           build:
+  #             commands:
+  #               - cd www/src
+  #               - npm install
+  #               - npm run build
+  #         artifacts:
+  #           baseDirectory: www/build/
+  #           files:
+  #             - '**/*'
+  #     Tags:
+  #       - Key: Name
+  #         Value: Todo
+  #     IAMServiceRole: !GetAtt AmplifyRole.Arn
 
-  AmplifyBranch:
-    Type: AWS::Amplify::Branch
-    Properties:
-      BranchName: !Ref Branch
-      AppId: !GetAtt AmplifyApp.AppId
-      Description: Amplify Console Branch
-      EnableAutoBuild: true
-      Tags:
-        - Key: Name
-          Value: todo-amplify-console
-        - Key: Branch
-          Value: !Ref Branch
+  # AmplifyBranch:
+  #   Type: AWS::Amplify::Branch
+  #   Properties:
+  #     BranchName: !Ref Branch
+  #     AppId: !GetAtt AmplifyApp.AppId
+  #     Description: Amplify Console Branch
+  #     EnableAutoBuild: true
+  #     Tags:
+  #       - Key: Name
+  #         Value: todo-amplify-console
+  #       - Key: Branch
+  #         Value: !Ref Branch
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
@@ -379,5 +379,5 @@ Outputs:
   CognitoDomainName:
     Description: The Cognito Hosted UI Domain Name
     Value: !Join ['', [!Ref CognitoDomainName, '-', !Ref AWS::StackName, '.auth.', !Ref AWS::Region, '.amazoncognito.com']]
-  AmplifyURL:
-    Value: !Join ['', ['https://', !GetAtt AmplifyBranch.BranchName, '.', !GetAtt AmplifyApp.DefaultDomain]]
+  # AmplifyURL:
+  #   Value: !Join ['', ['https://', !GetAtt AmplifyBranch.BranchName, '.', !GetAtt AmplifyApp.DefaultDomain]]
