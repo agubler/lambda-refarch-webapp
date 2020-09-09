@@ -76,7 +76,7 @@ Resources:
       GenerateSecret: false
       AllowedOAuthFlowsUserPoolClient: true
       AllowedOAuthFlows: ['code', 'implicit']
-      CallbackURLs: ['http://localhost:3000', 'http://localhost:8080' ,'https://localhost', !Join ['', ['https://', !GetAtt AmplifyBranch.BranchName, '.', !GetAtt AmplifyApp.DefaultDomain]]]
+      CallbackURLs: ['http://localhost:3000', 'http://localhost:8080' ,'https://localhost']
       SupportedIdentityProviders: ['COGNITO']
       AllowedOAuthScopes: ['phone', 'email', 'openid']
       ExplicitAuthFlows:
