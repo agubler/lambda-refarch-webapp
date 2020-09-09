@@ -1,0 +1,15 @@
+[
+  {
+    "ParameterKey": "VersionParam",
+    "ParameterValue": "v1"
+  }, 
+  {
+    "ParameterKey": "StageNameParam",
+    "ParameterValue": "prod"
+  },
+  {
+    "ParameterKey": "CognitoDomainName",
+    "ParameterValue": "mytodoappdemo"
+  }
+]
+
