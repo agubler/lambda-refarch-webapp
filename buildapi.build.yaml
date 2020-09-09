@@ -1,0 +1,13 @@
+version: '0.2'
+phases:
+  install:
+    runtime-versions:
+      nodejs: 12
+  build:
+    commands:
+      - aws cloudformation package --template-file template.yaml --output-template-file template-transformed.yaml --s3-bucket arn:aws:s3:::test-website-deploy
+artifacts:
+  name: "APIOutput"
+  files:
+    - template-transformed.yaml
+    - params.json
